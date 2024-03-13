@@ -1,0 +1,22 @@
+body {
+  font-family: "Montserrat", sans-serif;
+  padding: 0;
+}
+
+.products-wrapper {
+  background-color: beige;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+}
+
+.cart-wrapper {
+  background-color: rgb(0, 251, 234);
+  min-height: 10rem;
+}
+
+.product {
+  border: 2px solid red;
+  margin-bottom: 1rem;
+  padding: 0.3rem;
+  width: 10rem;
+}
