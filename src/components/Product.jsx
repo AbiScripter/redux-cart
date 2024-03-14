@@ -1,33 +1,39 @@
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { fullHeart, emptyHeart } from "../asset/svgs";
+import { cartAction, wishlistAction } from "../store/ActionTypes";
 const Product = ({ data }) => {
   const dispatch = useDispatch();
   const cart = useSelector((state) => state.cart);
   const wishlist = useSelector((state) => state.wishlist);
   const qty = cart[data.id]?.quantity;
   const isWishlisted = Boolean(wishlist[data.id]);
-  console.log(data);
 
   // const imageUrl = `${window.location.origin}/${data.imageUrl}`;
 
   const handleCartAdd = (item) => {
-    dispatch({ type: "CART", payload: { data: item, operation: "add" } });
+    dispatch(cartAction(item, "add"));
   };
 
   const handleCartSub = (item) => {
-    dispatch({ type: "CART", payload: { data: item, operation: "subtract" } });
+    dispatch(cartAction(item, "subtract"));
   };
 
-  const handleWishlist = (item) => {
-    dispatch({ type: "WISHLIST", payload: { data: item } });
+  const handleAddWishlist = (item) => {
+    dispatch(wishlistAction(item, "add"));
+  };
+
+  const handleDeleteWishlist = (item) => {
+    dispatch(wishlistAction(item, "delete"));
   };
 
   return (
     <div className="product">
-      <span onClick={() => handleWishlist(data)}>
-        {isWishlisted ? fullHeart : emptyHeart}
-      </span>
+      {isWishlisted ? (
+        <span onClick={() => handleDeleteWishlist(data)}>{fullHeart}</span>
+      ) : (
+        <span onClick={() => handleAddWishlist(data)}>{emptyHeart}</span>
+      )}
       <p>{data.name}</p>
       <p>{data.price}</p>
       <img src={data.imageUrl} alt="product" className="product-image" />

@@ -1,16 +1,20 @@
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { cartAction, wishlistAction } from "../store/ActionTypes";
 
 const WishlistPage = () => {
-  console.log("WISHLIST RENDER");
   const dispatch = useDispatch();
   const list = useSelector((state) => state.wishlist);
-  console.log(list);
   const valueList = Object.values(list);
-  const handleWishlist = (item) => {
-    dispatch({ type: "WISHLIST", payload: { data: item } });
+
+  const handleDeleteWishlist = (item) => {
+    dispatch(wishlistAction(item, "delete"));
   };
-  // console.log(list);
+
+  const handleMovingToCart = (item) => {
+    dispatch(wishlistAction(item, "delete"));
+    dispatch(cartAction(item, "add"));
+  };
 
   return (
     <div className="wishlist-wrapper">
@@ -20,8 +24,11 @@ const WishlistPage = () => {
           <div key={item.id}>
             <p>{item.name}</p>
             <img src={item.imageUrl} alt="product" />
-            <button onClick={() => handleWishlist(item)}>
+            <button onClick={() => handleDeleteWishlist(item)}>
               remove from wishlist
+            </button>
+            <button onClick={() => handleMovingToCart(item)}>
+              Move to Cart
             </button>
           </div>
         );
