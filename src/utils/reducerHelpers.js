@@ -46,10 +46,7 @@ export function wishlistHandleHelper(state, action) {
     // If not wishlisted, add it
     return {
       ...state,
-      wishlist: {
-        ...state.wishlist,
-        [newItem.id]: { ...newItem },
-      },
+      wishlist: { ...state.wishlist, [newItem.id]: { ...newItem } },
     };
   }
 }

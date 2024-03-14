@@ -5,6 +5,7 @@ const Wishlist = () => {
   console.log("WISHLIST RENDER");
   const dispatch = useDispatch();
   const list = useSelector((state) => state.wishlist);
+  console.log(list);
   const valueList = Object.values(list);
   const handleWishlist = (item) => {
     dispatch({ type: "WISHLIST", payload: { data: item } });
