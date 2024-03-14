@@ -26,3 +26,11 @@ body {
   height: 15rem;
   object-fit: contain;
 }
+
+.navlink {
+  color: black;
+}
+
+.navlink.active {
+  color: red;
+}

@@ -1,7 +1,7 @@
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 
-const Cart = () => {
+const CartPage = () => {
   const list = useSelector((state) => state.cart);
   const valueList = Object.values(list);
   console.log(list);
@@ -39,6 +39,7 @@ const CartItem = ({ item }) => {
           <p>
             <span>{item.name} </span>
             <span> {item.quantity}</span>
+            <img src={item.imageUrl} alt="product" />
           </p>
           <button onClick={() => handleWishlist(item)}>
             {isWishlisted ? (
@@ -58,4 +59,4 @@ const CartItem = ({ item }) => {
   );
 };
 
-export default Cart;
+export default CartPage;

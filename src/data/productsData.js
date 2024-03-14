@@ -75,7 +75,7 @@ export const products = [
   },
   {
     id: "SHRT014",
-    name: "Checked Shirt",
+    name: "Kurta",
     price: 699.99,
     imageUrl: "images/printed_shirt_2.webp",
   },

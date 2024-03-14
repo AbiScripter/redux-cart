@@ -1,7 +1,7 @@
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 
-const Wishlist = () => {
+const WishlistPage = () => {
   console.log("WISHLIST RENDER");
   const dispatch = useDispatch();
   const list = useSelector((state) => state.wishlist);
@@ -19,6 +19,7 @@ const Wishlist = () => {
         return (
           <div key={item.id}>
             <p>{item.name}</p>
+            <img src={item.imageUrl} alt="product" />
             <button onClick={() => handleWishlist(item)}>
               remove from wishlist
             </button>
@@ -29,4 +30,4 @@ const Wishlist = () => {
   );
 };
 
-export default Wishlist;
+export default WishlistPage;
