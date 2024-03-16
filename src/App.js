@@ -3,7 +3,7 @@ import Footer from "./components/Footer";
 import "./App.css";
 import { Provider } from "react-redux";
 import { Outlet } from "react-router-dom";
-import store from "./store";
+import store from "./rootStore";
 
 function App() {
   return (

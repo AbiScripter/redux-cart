@@ -1,10 +1,11 @@
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { cartAction, wishlistAction } from "../store/ActionTypes";
+import { cartAction, wishlistAction } from "../store/Cart/CartActionTypes";
+import { Button, Card } from "antd";
 
 const WishlistPage = () => {
   const dispatch = useDispatch();
-  const list = useSelector((state) => state.wishlist);
+  const list = useSelector((state) => state.productData.wishlist);
   const valueList = Object.values(list);
 
   const handleDeleteWishlist = (item) => {
@@ -21,16 +22,15 @@ const WishlistPage = () => {
       <h2>wishlist</h2>
       {valueList.map((item) => {
         return (
-          <div key={item.id}>
+          <Card key={item.id} cover={<img src={item.imageUrl} alt="product" />}>
             <p>{item.name}</p>
-            <img src={item.imageUrl} alt="product" />
-            <button onClick={() => handleDeleteWishlist(item)}>
+            <Button onClick={() => handleDeleteWishlist(item)}>
               remove from wishlist
-            </button>
-            <button onClick={() => handleMovingToCart(item)}>
+            </Button>
+            <Button onClick={() => handleMovingToCart(item)}>
               Move to Cart
-            </button>
-          </div>
+            </Button>
+          </Card>
         );
       })}
     </div>

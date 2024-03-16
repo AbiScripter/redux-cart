@@ -1,11 +1,14 @@
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { fullHeart, emptyHeart } from "../asset/svgs";
-import { cartAction, wishlistAction } from "../store/ActionTypes";
+import { cartAction, wishlistAction } from "../store/Cart/CartActionTypes";
+import { Button, Card } from "antd";
+import { PlusOutlined, MinusOutlined } from "@ant-design/icons";
+
 const Product = ({ data }) => {
   const dispatch = useDispatch();
-  const cart = useSelector((state) => state.cart);
-  const wishlist = useSelector((state) => state.wishlist);
+  const cart = useSelector((state) => state.productData.cart);
+  const wishlist = useSelector((state) => state.productData.wishlist);
   const qty = cart[data.id]?.quantity;
   const isWishlisted = Boolean(wishlist[data.id]);
 
@@ -28,7 +31,7 @@ const Product = ({ data }) => {
   };
 
   return (
-    <div className="product">
+    <Card cover={<img src={data.imageUrl} alt="product" />}>
       {isWishlisted ? (
         <span onClick={() => handleDeleteWishlist(data)}>{fullHeart}</span>
       ) : (
@@ -36,17 +39,22 @@ const Product = ({ data }) => {
       )}
       <p>{data.name}</p>
       <p>{data.price}</p>
-      <img src={data.imageUrl} alt="product" className="product-image" />
+
       {qty >= 1 ? (
         <div>
-          <button onClick={() => handleCartSub(data)}>-</button>
+          <Button size="small" onClick={() => handleCartSub(data)}>
+            <MinusOutlined />
+          </Button>
           <span>{qty}</span>
-          <button onClick={() => handleCartAdd(data)}>+</button>
+
+          <Button size="small" onClick={() => handleCartAdd(data)}>
+            <PlusOutlined />
+          </Button>
         </div>
       ) : (
-        <button onClick={() => handleCartAdd(data)}>Add to cart</button>
+        <Button onClick={() => handleCartAdd(data)}>Add to cart</Button>
       )}
-    </div>
+    </Card>
   );
 };
 

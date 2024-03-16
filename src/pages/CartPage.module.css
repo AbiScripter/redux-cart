@@ -1,0 +1,13 @@
+.cart_page {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+}
+.card {
+  width: 500px;
+  display: flex;
+  align-items: center;
+
+  img {
+    height: 10rem;
+  }
+}

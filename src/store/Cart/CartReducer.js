@@ -1,9 +1,8 @@
-// import { ActionTypes } from "./ActionTypes";
 import {
   cartHandleHelper,
   wishlistHandleHelper,
-} from "../utils/reducerHelpers";
-import { products } from "../data/productsData";
+} from "../../utils/cartReducerHelpers";
+import { products } from "../../data/productsData";
 
 const initialState = {
   products: products,
@@ -11,7 +10,7 @@ const initialState = {
   wishlist: {},
 };
 
-const reducer = (state = initialState, action) => {
+const cartReducer = (state = initialState, action) => {
   switch (action.type) {
     case "CART": {
       return cartHandleHelper(state, action);
@@ -25,4 +24,4 @@ const reducer = (state = initialState, action) => {
   }
 };
 
-export default reducer;
+export default cartReducer;
