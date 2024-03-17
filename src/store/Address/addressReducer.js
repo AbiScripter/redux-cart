@@ -1,3 +1,10 @@
+import {
+  addAddress,
+  deleteAddress,
+  editAddress,
+  defaultAddress,
+} from "../../utils/addressReducerHelpers";
+
 const initalState = {
   addressList: {
     //default address for the inital time
@@ -13,58 +20,18 @@ const initalState = {
     },
   },
 };
-function generateRandomId() {
-  return Math.random().toString(36).substr(2, 8);
-}
 
 const addressReducer = (state = initalState, action) => {
   switch (action.type) {
     case "ADDRESS": {
       if (action.payload.operation === "add") {
-        const newItem = action.payload.data;
-
-        const addressId = generateRandomId();
-        return {
-          ...state,
-          addressList: {
-            ...state.addressList,
-            [addressId]: { ...newItem, id: addressId, isDefault: false },
-          },
-        };
+        return addAddress(state, action);
       } else if (action.payload.operation === "delete") {
-        const newItem = action.payload.data;
-
-        const addressToBeDeleted = newItem;
-        const updatedList = { ...state.addressList };
-        delete updatedList[addressToBeDeleted.id];
-        return { ...state, addressList: updatedList };
+        return deleteAddress(state, action);
       } else if (action.payload.operation === "edit") {
-        const addressId = action.payload.editId;
-        const newData = action.payload.data;
-
-        return {
-          ...state,
-          addressList: {
-            ...state.addressList,
-            [addressId]: { ...state.addressList[addressId], ...newData },
-          },
-        };
+        return editAddress(state, action);
       } else if (action.payload.operation === "delivery") {
-        console.log(action.payload.data);
-        //set all to false
-        const newList = { ...state.addressList };
-        // Get an array of values from the address list object
-        const addresses = Object.values(newList);
-        // Update the "isDefault" property to false for each address
-        addresses.forEach((address) => {
-          address.isDefault = false;
-        });
-        console.log(newList);
-
-        //setting the selected one as default
-        const setDefaultId = action.payload.data.id;
-        newList[setDefaultId].isDefault = true;
-        return { ...state, addressList: newList };
+        return defaultAddress(state, action);
       }
       return state;
     }

@@ -1,17 +1,15 @@
 import React from "react";
 import { Button, Form, Input } from "antd";
 import { useDispatch } from "react-redux";
-
+import { addressAction } from "../store/Address/addressActionTypes";
 const AddressForm = ({ setIsAddressFormModalOpen }) => {
   const [form] = Form.useForm(); //for form resetting
 
   const dispatch = useDispatch();
 
   const handleFormSubmit = (data) => {
-    dispatch({
-      type: "ADDRESS",
-      payload: { data: data, operation: "add" },
-    });
+    dispatch(addressAction(data, "add"));
+
     form.resetFields(); //reset the form
     setIsAddressFormModalOpen((isModalOpen) => !isModalOpen); //close the form modal after submitting
   };

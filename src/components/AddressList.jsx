@@ -3,10 +3,11 @@ import { useDispatch, useSelector } from "react-redux";
 import { Button, Card, Col, Row } from "antd";
 import AddressFormModal from "./AddressFormModal";
 import EditFormModal from "./EditFormModal";
+import { addressAction } from "../store/Address/addressActionTypes";
 
 const AddressList = () => {
   const list = useSelector((state) => state.address.addressList);
-  console.log(list);
+  // console.log(list);
   const [isEditFormModalOpen, setIsEditFormModalOpen] = useState(false);
   const [editId, setEditId] = useState("");
   const valueList = Object.values(list);
@@ -46,21 +47,16 @@ const AddressCard = ({
   const dispatch = useDispatch();
 
   const handleDelete = () => {
-    dispatch({ type: "ADDRESS", payload: { data: user, operation: "delete" } });
+    dispatch(addressAction(user, "delete"));
   };
 
   const handleEdit = () => {
-    console.log("edit ra bunda");
-    console.log(user.id);
     setIsEditFormModalOpen((isOpen) => !isOpen);
     setEditId(() => user.id);
   };
 
   const handleDelivery = () => {
-    dispatch({
-      type: "ADDRESS",
-      payload: { data: user, operation: "delivery" },
-    });
+    dispatch(addressAction(user, "delivery"));
   };
 
   return (

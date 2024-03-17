@@ -1,25 +1,19 @@
 import React from "react";
 import { Button, Form, Input } from "antd";
 import { useDispatch, useSelector } from "react-redux";
+import { addressAction } from "../store/Address/addressActionTypes";
 
 const EditForm = ({ setIsEditFormModalOpen, editId }) => {
-  console.log("form", editId);
   const addressList = useSelector((state) => state.address.addressList);
 
   const formPrefill = addressList[editId];
   const [form] = Form.useForm(); //for form resetting
-  // console.log(initalValues);
   const dispatch = useDispatch();
 
-  const handleFormUpdate = (data) => {
-    console.log("dataa...", data);
+  const handleFormUpdate = (editedData) => {
+    console.log("editttedData", editedData);
 
-    dispatch({
-      type: "ADDRESS",
-      payload: { data: data, operation: "edit", editId: editId },
-    });
-
-    alert("editing daaa punda mavane");
+    dispatch(addressAction({ ...editedData, id: editId }, "edit"));
 
     form.resetFields(); //reset the form
     setIsEditFormModalOpen((isModalOpen) => !isModalOpen); //close the form modal after submitting
@@ -82,7 +76,13 @@ const EditForm = ({ setIsEditFormModalOpen, editId }) => {
       >
         <Input />
       </Form.Item>
-
+      {/* <Form.Item
+        label={editId}
+        name="id"
+        rules={[{ required: true, message: "editId*" }]}
+      >
+        <Input />
+      </Form.Item> */}
       <Button type="primary" block htmlType="submit">
         Update Address
       </Button>

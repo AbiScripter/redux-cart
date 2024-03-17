@@ -31,8 +31,6 @@ const CartPage = () => {
   return (
     <div className={style.cart_page}>
       <div>
-        {/* <AddressForm /> */}
-        {/* <AddressList /> */}
         <AddressModal />
         <CouponModal
           total={total}

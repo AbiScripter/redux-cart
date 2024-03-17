@@ -2,6 +2,7 @@ import {
   cartHandleHelper,
   wishlistHandleHelper,
 } from "../../utils/cartReducerHelpers";
+import { ActionTypes } from "./CartActionTypes";
 import { products } from "../../data/productsData";
 
 const initialState = {
@@ -12,11 +13,11 @@ const initialState = {
 
 const cartReducer = (state = initialState, action) => {
   switch (action.type) {
-    case "CART": {
+    case ActionTypes.CART: {
       return cartHandleHelper(state, action);
     }
 
-    case "WISHLIST": {
+    case ActionTypes.WISHLIST: {
       return wishlistHandleHelper(state, action);
     }
     default:
