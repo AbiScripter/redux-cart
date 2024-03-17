@@ -1,16 +1,11 @@
 import React from "react";
 import { Col, Row } from "antd";
 
-const CheckoutSummary = ({ list }) => {
+const CheckoutSummary = ({ list, total, couponDiscountPercent }) => {
   const platformFee = 20;
   let shippingCost = 0;
   let finalTotal = 0;
-
-  let total = list.reduce(
-    (acc, initial) => acc + initial.price * initial.quantity,
-    0
-  );
-  total = Math.floor(total);
+  const couponDiscount = Math.floor((couponDiscountPercent / 100) * total);
 
   const isShippingFree = Boolean(total > 1000);
 
@@ -19,7 +14,7 @@ const CheckoutSummary = ({ list }) => {
     if (isShippingFree) {
       shippingCost = 20;
     }
-    return total - cartDiscount + platformFee + shippingCost;
+    return total - cartDiscount + platformFee + shippingCost - couponDiscount;
   }
 
   finalTotal = totalCalcHelper(total, isShippingFree);
@@ -34,6 +29,11 @@ const CheckoutSummary = ({ list }) => {
       <Row>
         <Col span={12}>Discount on MRP (10%) </Col>
         <Col span={12}>₹{Math.floor((10 / 100) * total)}</Col>
+      </Row>
+
+      <Row>
+        <Col span={12}>Coupon Discount </Col>
+        <Col span={12}>₹{couponDiscount}</Col>
       </Row>
       <Row>
         <Col span={12}>Platform Fee</Col>

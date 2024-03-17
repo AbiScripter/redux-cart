@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import CartItem from "../components/CartItem";
 import { useDispatch, useSelector } from "react-redux";
 import { NavLink } from "react-router-dom";
@@ -10,14 +10,23 @@ import AddressForm from "../components/AddressForm";
 import CheckoutSummary from "../components/Checkout";
 import AddressList from "../components/AddressList";
 import AddressModal from "../components/AddressListModal";
+import CouponModal from "../components/CouponModal";
 
 const CartPage = () => {
+  let [couponDiscountPercent, setCouponDiscountPercent] = useState(0);
   const list = useSelector((state) => state.productData.cart);
   const valueList = Object.values(list);
+  console.log(list);
 
   if (valueList.length === 0) {
     return <EmptyCart />;
   }
+
+  let total = valueList.reduce(
+    (acc, initial) => acc + initial.price * initial.quantity,
+    0
+  );
+  total = Math.floor(total);
 
   return (
     <div className={style.cart_page}>
@@ -25,6 +34,10 @@ const CartPage = () => {
         {/* <AddressForm /> */}
         {/* <AddressList /> */}
         <AddressModal />
+        <CouponModal
+          total={total}
+          setCouponDiscountPercent={setCouponDiscountPercent}
+        />
 
         <h2>Cart</h2>
         {valueList.map((item) => {
@@ -32,7 +45,11 @@ const CartPage = () => {
         })}
       </div>
 
-      <CheckoutSummary list={valueList} />
+      <CheckoutSummary
+        list={valueList}
+        total={total}
+        couponDiscountPercent={couponDiscountPercent}
+      />
     </div>
   );
 };
