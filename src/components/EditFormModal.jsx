@@ -1,8 +1,6 @@
-import React, { useState } from "react";
-import { Button, Modal } from "antd";
+import React from "react";
+import { Modal } from "antd";
 import EditForm from "./EditForm";
-import { useSelector } from "react-redux";
-import Title from "antd/es/skeleton/Title";
 
 const EditFormModal = ({
   isEditFormModalOpen,
@@ -28,10 +26,11 @@ const EditFormModal = ({
       </Button> */}
       {/* <Button>{userId}</Button> */}
       <Modal
-        title="Address Modal"
+        title="Edit Address"
         open={isEditFormModalOpen}
         onOk={handleOk}
         onCancel={handleCancel}
+        footer={null}
       >
         <EditForm
           setIsEditFormModalOpen={setIsEditFormModalOpen}

@@ -11,7 +11,7 @@ const initalState = {
     "2cyuouag": {
       name: "Abilash",
       mobile: "9178912120",
-      pincode: "636001",
+      pincode: "682016",
       address: "12th cross , MG Road",
       city: "Kochi",
       state: "Kerala",

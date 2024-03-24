@@ -1,26 +1,36 @@
 import { NavLink } from "react-router-dom";
+import { Row, Col } from "antd";
+import { HeartOutlined, ShoppingOutlined } from "@ant-design/icons";
+import "./Header.css";
+import logo from "../asset/myntra-logo.png";
 
 const Header = () => {
   return (
-    <nav>
-      <ul>
-        <li>
+    <div>
+      <Row className="nav" align="middle">
+        <Col span={20}>
           <NavLink to="/" className="navlink">
-            <p>Myntra Men</p>
+            <img src={logo} alt="logo" className="logo" />
           </NavLink>
-        </li>
-        <li>
+        </Col>
+        <Col span={2}>
           <NavLink to="/wishlist" className="navlink">
-            wishlist
+            <span>
+              <HeartOutlined />
+              &nbsp; Wishlist
+            </span>
           </NavLink>
-        </li>
-        <li>
+        </Col>
+        <Col span={2}>
           <NavLink to="/cart" className="navlink">
-            Cart
+            <span>
+              <ShoppingOutlined />
+              &nbsp;Bag
+            </span>
           </NavLink>
-        </li>
-      </ul>
-    </nav>
+        </Col>
+      </Row>
+    </div>
   );
 };
 

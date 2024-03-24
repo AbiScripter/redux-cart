@@ -1,6 +1,5 @@
 import React from "react";
 import { Button, Form, Radio, Card, Popover } from "antd";
-import { useDispatch } from "react-redux";
 
 const CouponForm = ({
   total,
@@ -11,6 +10,10 @@ const CouponForm = ({
 
   const handleFormSubmit = (data) => {
     console.log(data);
+    if (!data["radio-group"]) {
+      alert("ommala");
+      return;
+    }
     setCouponDiscountPercent(data["radio-group"]);
     setIsCouponModalOpen((isModalOpen) => !isModalOpen); //close the form modal after submitting
   };
@@ -30,7 +33,6 @@ const CouponForm = ({
         returnVal = "Eligible";
       }
     }
-
     return returnVal;
   };
 
@@ -49,7 +51,7 @@ const CouponForm = ({
             price={999}
             offerPercentage={10}
             checkEligible={checkEligible}
-          />{" "}
+          />
           <CustomRadio
             price={1799}
             offerPercentage={25}
@@ -64,7 +66,7 @@ const CouponForm = ({
       </Form.Item>
 
       <Button type="primary" block htmlType="submit">
-        Submit
+        APPLY
       </Button>
     </Form>
   );
@@ -72,7 +74,11 @@ const CouponForm = ({
 
 const CustomRadio = ({ price, offerPercentage, checkEligible }) => {
   return (
-    <Radio value={offerPercentage} disabled={checkEligible(price, "radio")}>
+    <Radio
+      value={offerPercentage}
+      disabled={checkEligible(price, "radio")}
+      className="custom-radio"
+    >
       <Popover placement="right" content={checkEligible(price, "popover")}>
         <Card style={{ width: 300 }}>
           <Button>STEAL{offerPercentage}</Button>

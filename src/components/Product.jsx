@@ -2,7 +2,7 @@ import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { fullHeart, emptyHeart } from "../asset/svgs";
 import { cartAction, wishlistAction } from "../store/Cart/CartActionTypes";
-import { Button, Card } from "antd";
+import { Button, Card, notification } from "antd";
 import { PlusOutlined, MinusOutlined } from "@ant-design/icons";
 
 const Product = ({ data }) => {
@@ -16,45 +16,73 @@ const Product = ({ data }) => {
 
   const handleCartAdd = (item) => {
     dispatch(cartAction(item, "add"));
+    handleNotification("bag", "add");
   };
 
   const handleCartSub = (item) => {
     dispatch(cartAction(item, "subtract"));
+    handleNotification("bag", "remove");
   };
 
   const handleAddWishlist = (item) => {
     dispatch(wishlistAction(item, "add"));
+    handleNotification("wishlist", "add");
   };
 
   const handleDeleteWishlist = (item) => {
     dispatch(wishlistAction(item, "delete"));
+    handleNotification("wishlist", "remove");
+  };
+
+  const handleNotification = (where, actionType) => {
+    notification.open({
+      message: `Product ${actionType}${
+        actionType === "add" ? "ed to" : "d from"
+      } the ${where}`,
+      duration: 1,
+      type: "success",
+    });
   };
 
   return (
-    <Card cover={<img src={data.imageUrl} alt="product" />}>
-      {isWishlisted ? (
-        <span onClick={() => handleDeleteWishlist(data)}>{fullHeart}</span>
-      ) : (
-        <span onClick={() => handleAddWishlist(data)}>{emptyHeart}</span>
-      )}
-      <p>{data.name}</p>
-      <p>{data.price}</p>
+    <div className="product">
+      <Card
+        cover={
+          <img src={data.imageUrl} alt="product" className="product-card" />
+        }
+      >
+        {isWishlisted ? (
+          <span className="heart" onClick={() => handleDeleteWishlist(data)}>
+            {fullHeart}
+          </span>
+        ) : (
+          <span className="heart" onClick={() => handleAddWishlist(data)}>
+            {emptyHeart}
+          </span>
+        )}
 
-      {qty >= 1 ? (
-        <div>
-          <Button size="small" onClick={() => handleCartSub(data)}>
-            <MinusOutlined />
-          </Button>
-          <span>{qty}</span>
+        <p>
+          <span>{data.name}</span>
+          <br />
+          <span>Rs. {data.price}</span>
+        </p>
 
-          <Button size="small" onClick={() => handleCartAdd(data)}>
-            <PlusOutlined />
-          </Button>
-        </div>
-      ) : (
-        <Button onClick={() => handleCartAdd(data)}>Add to cart</Button>
-      )}
-    </Card>
+        {qty >= 1 ? (
+          <div>
+            <Button size="small" onClick={() => handleCartSub(data)}>
+              <MinusOutlined />
+            </Button>
+            <span> {qty} </span>
+
+            <Button size="small" onClick={() => handleCartAdd(data)}>
+              <PlusOutlined />
+            </Button>
+          </div>
+        ) : (
+          <Button onClick={() => handleCartAdd(data)}>Add to cart</Button>
+        )}
+      </Card>
+    </div>
   );
 };
 

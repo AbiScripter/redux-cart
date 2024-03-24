@@ -1,12 +1,20 @@
 import React from "react";
+import "./WishListPage.css";
+
 import { useDispatch, useSelector } from "react-redux";
 import { cartAction, wishlistAction } from "../store/Cart/CartActionTypes";
-import { Button, Card } from "antd";
+import { Button, Card, Flex } from "antd";
+import emptyWishlist from "../asset/empty-wishlist.png";
+import { NavLink } from "react-router-dom";
 
 const WishlistPage = () => {
   const dispatch = useDispatch();
   const list = useSelector((state) => state.productData.wishlist);
   const valueList = Object.values(list);
+
+  if (valueList.length === 0) {
+    return <EmptyWishlist />;
+  }
 
   const handleDeleteWishlist = (item) => {
     dispatch(wishlistAction(item, "delete"));
@@ -18,21 +26,43 @@ const WishlistPage = () => {
   };
 
   return (
-    <div className="wishlist-wrapper">
-      <h2>wishlist</h2>
+    <div className="wishlist_container">
       {valueList.map((item) => {
         return (
-          <Card key={item.id} cover={<img src={item.imageUrl} alt="product" />}>
-            <p>{item.name}</p>
-            <Button onClick={() => handleDeleteWishlist(item)}>
-              remove from wishlist
-            </Button>
-            <Button onClick={() => handleMovingToCart(item)}>
-              Move to Cart
-            </Button>
-          </Card>
+          <div className="wishlist_product">
+            <Card
+              key={item.id}
+              cover={<img src={item.imageUrl} alt="product" />}
+            >
+              <p>
+                <span>{item.name}</span>
+                <br />
+                <span> Rs. {item.price}</span>
+              </p>
+              <Flex gap={5} justify="center">
+                <Button onClick={() => handleMovingToCart(item)}>
+                  MOVE TO BAG
+                </Button>
+                <Button danger onClick={() => handleDeleteWishlist(item)}>
+                  REMOVE
+                </Button>
+              </Flex>
+            </Card>
+          </div>
         );
       })}
+    </div>
+  );
+};
+
+const EmptyWishlist = () => {
+  return (
+    <div className="empty_wishlist">
+      <img src={emptyWishlist} alt="empty-wishlist" />
+      <p>Your Wish list is empty</p>
+      <Button>
+        <NavLink to="/">Explore More</NavLink>
+      </Button>
     </div>
   );
 };

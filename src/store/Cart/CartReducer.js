@@ -3,10 +3,16 @@ import {
   wishlistHandleHelper,
 } from "../../utils/cartReducerHelpers";
 import { ActionTypes } from "./CartActionTypes";
-import { products } from "../../data/productsData";
+import {
+  menProducts,
+  womenProducts,
+  kidsProducts,
+} from "../../data/productsData";
 
 const initialState = {
-  products: products,
+  menProducts: menProducts,
+  womenProducts: womenProducts,
+  kidsProducts: kidsProducts,
   cart: {},
   wishlist: {},
 };

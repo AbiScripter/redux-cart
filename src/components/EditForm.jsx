@@ -84,7 +84,7 @@ const EditForm = ({ setIsEditFormModalOpen, editId }) => {
         <Input />
       </Form.Item> */}
       <Button type="primary" block htmlType="submit">
-        Update Address
+        UPDATE ADDRESS
       </Button>
     </Form>
   );

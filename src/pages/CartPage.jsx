@@ -1,16 +1,13 @@
 import React, { useState } from "react";
 import CartItem from "../components/CartItem";
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import { NavLink } from "react-router-dom";
-import { wishlistAction, cartAction } from "../store/Cart/CartActionTypes";
-import { Button, Card, Col, Row } from "antd";
-import { PlusOutlined, MinusOutlined } from "@ant-design/icons";
-import style from "./CartPage.module.css";
-import AddressForm from "../components/AddressForm";
+import { Button } from "antd";
 import CheckoutSummary from "../components/Checkout";
-import AddressList from "../components/AddressList";
 import AddressModal from "../components/AddressListModal";
 import CouponModal from "../components/CouponModal";
+import emptybag from "../asset/empty-bag.webp";
+import "./CartPage.css";
 
 const CartPage = () => {
   let [couponDiscountPercent, setCouponDiscountPercent] = useState(0);
@@ -29,34 +26,41 @@ const CartPage = () => {
   total = Math.floor(total);
 
   return (
-    <div className={style.cart_page}>
-      <div>
+    <div className="cart_page">
+      <div className="cart_page_left">
         <AddressModal />
+
+        <div>
+          {valueList.map((item) => {
+            return <CartItem item={item} key={item.id} />;
+          })}
+        </div>
+      </div>
+      <div className="cart_page_right">
         <CouponModal
           total={total}
           setCouponDiscountPercent={setCouponDiscountPercent}
+          couponDiscountPercent={couponDiscountPercent}
         />
-
-        <h2>Cart</h2>
-        {valueList.map((item) => {
-          return <CartItem item={item} key={item.id} />;
-        })}
+        <CheckoutSummary
+          list={valueList}
+          total={total}
+          couponDiscountPercent={couponDiscountPercent}
+        />
       </div>
-
-      <CheckoutSummary
-        list={valueList}
-        total={total}
-        couponDiscountPercent={couponDiscountPercent}
-      />
     </div>
   );
 };
 
 const EmptyCart = () => {
   return (
-    <>
-      <NavLink to="/wishlist">Add Items from the Wishlist</NavLink>
-    </>
+    <div className="emptybag">
+      <img src={emptybag} alt="empty_bag" />
+      <p> There is nothing in your bag. Let's add some items.</p>
+      <Button>
+        <NavLink to="/wishlist">Add Items from the Wishlist</NavLink>
+      </Button>
+    </div>
   );
 };
 

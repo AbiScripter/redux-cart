@@ -20,13 +20,14 @@ const AddressFormModal = () => {
   return (
     <>
       <Button block danger type="primary" onClick={showModal}>
-        Add New Address
+        ADD NEW ADDRESS
       </Button>
       <Modal
-        title="Address Modal"
+        title="Add Address"
         open={isAddressFormModalOpen}
         onOk={handleOk}
         onCancel={handleCancel}
+        footer={null}
       >
         <AddressForm setIsAddressFormModalOpen={setIsAddressFormModalOpen} />
       </Modal>

@@ -3,12 +3,10 @@ import { useDispatch } from "react-redux";
 import { wishlistAction, cartAction } from "../store/Cart/CartActionTypes";
 import { Button, Card, Flex } from "antd";
 import { PlusOutlined, MinusOutlined } from "@ant-design/icons";
-import style from "../pages/CartPage.module.css";
+import "../pages/CartPage.css";
 
 const CartItem = ({ item }) => {
   const dispatch = useDispatch();
-  // const wishlist = useSelector((state) => state.wishlist);
-  // let isWishlisted = Boolean(wishlist[item.id]);
 
   const handleMovingToWishlist = (item) => {
     //first add to wishlist
@@ -38,7 +36,7 @@ const CartItem = ({ item }) => {
     <div>
       {item.quantity > 0 ? (
         <Card
-          className={style.card}
+          className="card"
           cover={<img src={item.imageUrl} alt="product" />}
         >
           <div>
@@ -57,20 +55,11 @@ const CartItem = ({ item }) => {
           </div>
 
           <Flex gap="small">
-            <Button
-              size="small"
-              type="primary"
-              onClick={() => handleMovingToWishlist(item)}
-            >
-              <span>Move to Wishlist</span>
+            <Button size="small" onClick={() => handleMovingToWishlist(item)}>
+              <span>MOVE TO WISHLIST</span>
             </Button>
-            <Button
-              size="small"
-              danger
-              type="primary"
-              onClick={() => handleCartDelete(item)}
-            >
-              Delete from Cart
+            <Button size="small" danger onClick={() => handleCartDelete(item)}>
+              DELETE FROM CART
             </Button>
           </Flex>
         </Card>

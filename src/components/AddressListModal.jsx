@@ -1,7 +1,8 @@
 import React, { useState } from "react";
-import { Button, Modal } from "antd";
+import { Button, Modal, Card, Col, Row } from "antd";
 import AddressList from "./AddressList";
 import { useSelector } from "react-redux";
+import "../pages/CartPage.css";
 
 const AddressModal = () => {
   const [isAddressListModalOpen, setIsAddressListModalOpen] = useState(false);
@@ -28,35 +29,44 @@ const AddressModal = () => {
   };
 
   return (
-    <>
-      <div>
-        <AddressCard defaultAddress={defaultAddress} />
-        <Button type="primary" onClick={showModal}>
-          Change Address
-        </Button>
-      </div>
-
+    <div>
+      <Card className="address_preview">
+        <Row justify="center" align="middle">
+          <Col span={16}>
+            {" "}
+            <AddressPreview defaultAddress={defaultAddress} />
+          </Col>
+          <Col span={8}>
+            <Button danger onClick={showModal}>
+              CHANGE ADDRESS
+            </Button>
+          </Col>
+        </Row>
+      </Card>
       <Modal
-        title="Basic Modal"
         open={isAddressListModalOpen}
         onOk={handleOk}
         onCancel={handleCancel}
+        footer={null}
       >
         <AddressList />
       </Modal>
-    </>
+    </div>
   );
 };
 
-const AddressCard = ({ defaultAddress }) => {
+const AddressPreview = ({ defaultAddress }) => {
   let { ...rest } = defaultAddress || {};
   return (
     <div>
       <p>
-        Deliver to: {rest.name},{rest.pincode}
-      </p>
-      <p>
-        {rest.address},{rest.city}
+        <span>
+          Deliver to: {rest.name}, {rest.pincode}
+        </span>
+        <br />
+        <span>
+          {rest.address}, {rest.city} {rest.pincode}.
+        </span>
       </p>
     </div>
   );

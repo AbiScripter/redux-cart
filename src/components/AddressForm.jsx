@@ -9,7 +9,6 @@ const AddressForm = ({ setIsAddressFormModalOpen }) => {
 
   const handleFormSubmit = (data) => {
     dispatch(addressAction(data, "add"));
-
     form.resetFields(); //reset the form
     setIsAddressFormModalOpen((isModalOpen) => !isModalOpen); //close the form modal after submitting
   };
@@ -80,7 +79,7 @@ const AddressForm = ({ setIsAddressFormModalOpen }) => {
       </Form.Item>
 
       <Button type="primary" block htmlType="submit">
-        Submit
+        SUBMIT
       </Button>
     </Form>
   );
