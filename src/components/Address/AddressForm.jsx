@@ -1,22 +1,16 @@
 import React from "react";
 import { Button, Form, Input } from "antd";
-import { useDispatch, useSelector } from "react-redux";
-import { addressAction } from "../store/Address/addressActionTypes";
-
-const EditForm = ({ setIsEditFormModalOpen, editId }) => {
-  const addressList = useSelector((state) => state.address.addressList);
-
-  const formPrefill = addressList[editId];
+import { useDispatch } from "react-redux";
+import { addressAction } from "../../store/Address/addressActionTypes";
+const AddressForm = ({ setIsAddressFormModalOpen }) => {
   const [form] = Form.useForm(); //for form resetting
+
   const dispatch = useDispatch();
 
-  const handleFormUpdate = (editedData) => {
-    console.log("editttedData", editedData);
-
-    dispatch(addressAction({ ...editedData, id: editId }, "edit"));
-
+  const handleFormSubmit = (data) => {
+    dispatch(addressAction(data, "add"));
     form.resetFields(); //reset the form
-    setIsEditFormModalOpen((isModalOpen) => !isModalOpen); //close the form modal after submitting
+    setIsAddressFormModalOpen((isModalOpen) => !isModalOpen); //close the form modal after submitting
   };
 
   return (
@@ -24,9 +18,16 @@ const EditForm = ({ setIsEditFormModalOpen, editId }) => {
       form={form}
       variant="filled"
       style={{ maxWidth: 600 }}
-      onFinish={handleFormUpdate}
-      initialValues={{ ...formPrefill }}
-      // initialValues={initalValues}
+      onFinish={handleFormSubmit}
+      initialValues={{
+        name: "abilash",
+        mobile: "7788888322",
+        pincode: "999999",
+        address: "19 2nd croos road",
+        city: "banglore",
+        state: "karnataka",
+        id: "5siyss01",
+      }}
     >
       <h3>Contact Details</h3>
       <Form.Item
@@ -76,18 +77,12 @@ const EditForm = ({ setIsEditFormModalOpen, editId }) => {
       >
         <Input />
       </Form.Item>
-      {/* <Form.Item
-        label={editId}
-        name="id"
-        rules={[{ required: true, message: "editId*" }]}
-      >
-        <Input />
-      </Form.Item> */}
+
       <Button type="primary" block htmlType="submit">
-        UPDATE ADDRESS
+        SUBMIT
       </Button>
     </Form>
   );
 };
 
-export default EditForm;
+export default AddressForm;

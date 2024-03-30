@@ -4,8 +4,8 @@ import { useSelector } from "react-redux";
 import { NavLink } from "react-router-dom";
 import { Button } from "antd";
 import CheckoutSummary from "../components/Checkout";
-import AddressModal from "../components/AddressListModal";
-import CouponModal from "../components/CouponModal";
+import AddressModal from "../components/Address/AddressListModal";
+import CouponModal from "../components/Coupon/CouponModal";
 import emptybag from "../asset/empty-bag.webp";
 import "./CartPage.css";
 

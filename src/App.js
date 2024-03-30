@@ -1,5 +1,5 @@
-import Header from "./components/Header";
-import Footer from "./components/Footer";
+import Header from "./Layout/Header";
+import Footer from "./Layout/Footer";
 import "./App.css";
 import { Provider } from "react-redux";
 import { Outlet } from "react-router-dom";

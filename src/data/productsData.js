@@ -105,6 +105,7 @@ export const menProducts = [
     imageUrl: "images/men/casual_printed_shirt.webp",
   },
 ];
+
 export const womenProducts = [
   {
     id: "WOMEN001",

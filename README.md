@@ -1,6 +1,12 @@
-# Getting Started with Create React App
+## About This Project
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+This project is a minimized React.js clone of the popular e-commerce platform Myntra. The primary goal was to recreate Myntra's user interface and to implement core e-commerce features like product listing, wishlist, product details, and cart functionality
+
+Built with React.js,Redux handles state management, React Router enables navigation, and Ant Design UI library provides a responsive user interface.
+
+This clone offers three main pages: the Home page, Wishlist page, and Cart page.
+
+The Home page showcases products categorized for men, women, and kids. The Wishlist page allows managing favorite items, while The Cart page implements key features like adding/removing items, setting delivery addresses, applying coupons and checkout summary.
 
 ## Available Scripts
 

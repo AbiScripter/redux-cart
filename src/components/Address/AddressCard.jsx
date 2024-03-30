@@ -1,6 +1,6 @@
 import { useDispatch } from "react-redux";
 import { Button, Popover, Flex } from "antd";
-import { addressAction } from "../store/Address/addressActionTypes";
+import { addressAction } from "../../store/Address/addressActionTypes";
 
 const AddressCard = ({
   user,

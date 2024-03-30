@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { Button, Modal, Card, Col, Row } from "antd";
 import AddressList from "./AddressList";
 import { useSelector } from "react-redux";
-import "../pages/CartPage.css";
+import "../../pages/CartPage.css";
 
 const AddressModal = () => {
   const [isAddressListModalOpen, setIsAddressListModalOpen] = useState(false);

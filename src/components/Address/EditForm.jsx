@@ -1,16 +1,22 @@
 import React from "react";
 import { Button, Form, Input } from "antd";
-import { useDispatch } from "react-redux";
-import { addressAction } from "../store/Address/addressActionTypes";
-const AddressForm = ({ setIsAddressFormModalOpen }) => {
-  const [form] = Form.useForm(); //for form resetting
+import { useDispatch, useSelector } from "react-redux";
+import { addressAction } from "../../store/Address/addressActionTypes";
 
+const EditForm = ({ setIsEditFormModalOpen, editId }) => {
+  const addressList = useSelector((state) => state.address.addressList);
+
+  const formPrefill = addressList[editId];
+  const [form] = Form.useForm(); //for form resetting
   const dispatch = useDispatch();
 
-  const handleFormSubmit = (data) => {
-    dispatch(addressAction(data, "add"));
+  const handleFormUpdate = (editedData) => {
+    console.log("editttedData", editedData);
+
+    dispatch(addressAction({ ...editedData, id: editId }, "edit"));
+
     form.resetFields(); //reset the form
-    setIsAddressFormModalOpen((isModalOpen) => !isModalOpen); //close the form modal after submitting
+    setIsEditFormModalOpen((isModalOpen) => !isModalOpen); //close the form modal after submitting
   };
 
   return (
@@ -18,16 +24,9 @@ const AddressForm = ({ setIsAddressFormModalOpen }) => {
       form={form}
       variant="filled"
       style={{ maxWidth: 600 }}
-      onFinish={handleFormSubmit}
-      initialValues={{
-        name: "abilash",
-        mobile: "7788888322",
-        pincode: "999999",
-        address: "19 2nd croos road",
-        city: "banglore",
-        state: "karnataka",
-        id: "5siyss01",
-      }}
+      onFinish={handleFormUpdate}
+      initialValues={{ ...formPrefill }}
+      // initialValues={initalValues}
     >
       <h3>Contact Details</h3>
       <Form.Item
@@ -77,12 +76,18 @@ const AddressForm = ({ setIsAddressFormModalOpen }) => {
       >
         <Input />
       </Form.Item>
-
+      {/* <Form.Item
+        label={editId}
+        name="id"
+        rules={[{ required: true, message: "editId*" }]}
+      >
+        <Input />
+      </Form.Item> */}
       <Button type="primary" block htmlType="submit">
-        SUBMIT
+        UPDATE ADDRESS
       </Button>
     </Form>
   );
 };
 
-export default AddressForm;
+export default EditForm;

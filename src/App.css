@@ -3,13 +3,6 @@ body {
   padding: 0;
 }
 
-.products-wrapper {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(100px, 170px));
-  gap: 1.3rem;
-  margin: 3rem 0;
-}
-
 .navlink {
   color: black;
 }
