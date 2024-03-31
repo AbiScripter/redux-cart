@@ -13,7 +13,7 @@ const CartPage = () => {
   let [couponDiscountPercent, setCouponDiscountPercent] = useState(0);
   const list = useSelector((state) => state.productData.cart);
   const valueList = Object.values(list);
-  console.log(list);
+  // console.log(list);
 
   if (valueList.length === 0) {
     return <EmptyCart />;

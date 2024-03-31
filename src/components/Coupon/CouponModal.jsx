@@ -5,21 +5,23 @@ import "../../pages/CartPage.css";
 
 function stillValid(total, percent) {
   console.log(total, percent);
-  if (percent === 0) {
-    return true;
-  }
-  if (total >= 999 && total < 1799 && percent === 10) {
-    return true;
-  }
-  if (total >= 1799 && total < 4999 && percent === 25) {
-    return true;
+  if (percent > 0) {
+    if (total < 999) return false;
+    if (total >= 999 && total < 1799 && percent === 10) {
+      return true;
+    }
+    if (total >= 1799 && total < 4999 && percent === 25) {
+      return true;
+    }
+
+    if (total >= 4999 && percent === 50) {
+      return true;
+    } else {
+      return false;
+    }
   }
 
-  if (total >= 4999 && percent === 50) {
-    return true;
-  }
-
-  return false;
+  return true;
 }
 
 const CouponModal = ({
@@ -30,6 +32,8 @@ const CouponModal = ({
   const [isCouponModalOpen, setIsCouponModalOpen] = useState(false);
 
   //!check already applied coupon still valid for the current total
+  //TODO:Correct Error
+  console.log(total, couponDiscountPercent);
   if (!stillValid(total, couponDiscountPercent)) {
     alert(
       "The current Total will fall below the threshold for the applied coupon. The coupon has been reset."
